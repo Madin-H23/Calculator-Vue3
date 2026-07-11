@@ -51,4 +51,17 @@ defineEmits(['press'])
 }
 .btn.equals:hover { background: var(--eq-hover); }
 .btn.equals:active { background: var(--eq-pressed); }
+.btn.function {
+  background: var(--fn-bg);
+  font-size: 16px;
+  font-weight: 600;
+  padding: 14px 0;
+}
+.btn.function:hover { background: var(--fn-hover); }
+.btn.function:active { background: var(--fn-pressed); }
+.btn.function:disabled {
+  color: var(--memory-fg);
+  background: transparent;
+  font-size: 13px;
+}
 </style>
