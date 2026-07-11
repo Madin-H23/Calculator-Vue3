@@ -194,19 +194,24 @@ App.vue
 
 ### 6.6 内存功能(交付后扩展)
 
-> 原 §1 列为非目标(禁用占位);交付后按用户需求追加(commit `68c53c8`/`3b4c450`,归档 `docs/ai-chat/05-memory.md`)。采用**单寄存器**内存(非 Win11 的内存栈);`M▾` 浮窗仍为占位。
+> 原 §1 列为非目标(禁用占位);交付后按用户需求分阶段追加(归档 `docs/ai-chat/05-memory.md`):① 单寄存器内存 → ② 内存键样式(扁平 + hover)→ ③ **栈模型 + M▾ 浮窗**(对齐 Win11 内存栈)。
 
-状态:`memory = ref(0)`、`hasMemory = ref(false)`。
+**状态**:`memory = ref([])`(栈,`memory[0]` 为栈顶/最新);`hasMemory = computed(memory.length > 0)`;`showMemory = ref(false)`(浮窗开关,Calculator 持有)。
 
 | action | 行为 |
 |---|---|
-| `memoryStore`(MS) | `error` 忽略;`memory = parseFloat(current)`(NaN 按 0);`hasMemory = true` |
-| `memoryClear`(MC) | `memory = 0`;`hasMemory = false` |
-| `memoryRecall`(MR) | `!hasMemory` 忽略;`error=false`;`current = format(memory)`;`resetNext=true` |
-| `memoryAdd`(M+) | `error` 忽略;`memory += parseFloat(current)`(NaN 按 0);`hasMemory = true` |
-| `memorySubtract`(M-) | `error` 忽略;`memory -= parseFloat(current)`(NaN 按 0);`hasMemory = true` |
+| `memoryStore`(MS) | `error` 忽略;`memory = [current, ...memory]`(压栈,最新在前);`resetNext=true` |
+| `memoryClear`(MC) | `memory = []` |
+| `memoryRecall`(MR) | 栈空忽略;`error=false`;`current = format(memory[0])`;`resetNext=true` |
+| `memoryAdd`(M+) | `error` 忽略;栈空压入 current,否则 `memory[0] += current`;`resetNext=true` |
+| `memorySubtract`(M-) | `error` 忽略;栈空压入 `-current`,否则 `memory[0] -= current`;`resetNext=true` |
+| `memoryClearAt(i)` | 删除第 i 项 |
+| `memoryAddAt(i)` | `memory[i] += current` |
+| `memorySubtractAt(i)` | `memory[i] -= current` |
 
-启用态:`MC`/`MR` 在 `!hasMemory` 时禁用;`M+`/`M-`/`MS` 始终启用;`M▾` 始终禁用。`hasMemory` 时标题栏显示 `M` 徽标(`--accent` 色)。
+**键启用态**:`MC`/`MR` 在 `!hasMemory` 时禁用;`M+`/`M-`/`MS`/`M▾` 始终启用。`hasMemory` 时标题栏显示 `M` 徽标(`--accent`)。内存键视觉(`variant=memory`)与禁用态一致(透明底、13px),仅文字明暗区分 + hover/active 背景反馈。
+
+**M▾ 浮窗**(`MemoryPanel.vue`):点击 `M▾` 切换 `showMemory`。栈空显示"内存中暂无内容";否则列出栈项(最新在前),每项含 `MC`/`M+`/`M-`(逐项操作,带索引)。半透明 backdrop 覆盖计算器,点击外部关闭;`memoryView` 经 `format` + `-`→`−` 转换。
 
 ---
 

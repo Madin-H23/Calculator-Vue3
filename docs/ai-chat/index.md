@@ -43,3 +43,7 @@
 |---|---|---|---|
 | 30 | `68c53c8` | feat(memory): MC/MR/M+/M-/MS 内存寄存器与运算 | `05-memory.md` |
 | 31 | `3b4c450` | feat(memory): M 内存指示徽标 | `05-memory.md` |
+| 32 | `269ff9b` | fix(memory): 内存键启用态保持禁用样式(仅文字变明显) | `05-memory.md` |
+| 33 | `a4fd9fb` | fix(memory): 内存键 hover/active 背景反馈(与数字键一致) | `05-memory.md` |
+| 34 | `c486a8b` | feat(memory): 内存改为栈模型(MS 压栈/栈顶运算/逐项操作) | `05-memory.md` |
+| 35 | `de8cb74` | feat(memory): M▾ 浮窗(栈列表 + 逐项 MC/M+/M- + 空态 + 点击外部关闭) | `05-memory.md` |
