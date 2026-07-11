@@ -79,5 +79,11 @@ export function useCalculator() {
 
   function clearEntry() { current.value = '0'; resetNext.value = false; error.value = false }
 
-  return { current, expression, activeOp, inputDigit, inputDot, chooseOp, equals, clearAll, clearEntry }
+  function backspace() {
+    if (error.value || resetNext.value) return
+    current.value = current.value.length > 1 ? current.value.slice(0, -1) : '0'
+    if (current.value === '-') current.value = '0'
+  }
+
+  return { current, expression, activeOp, inputDigit, inputDot, chooseOp, equals, clearAll, clearEntry, backspace }
 }
