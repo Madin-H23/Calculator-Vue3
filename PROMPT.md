@@ -1,5 +1,15 @@
 # Vue 3 计算器项目 — 执行型 Prompt
 
+> ✅ **状态:已完成(2026-07-11)**。本文件是**原始需求规格**(29 步执行清单),已按此实施完毕,保留作为需求记录。
+>
+> - 实施路径:`superpowers:brainstorming` → `writing-plans` → `executing-plans`(三阶段隔离、单步单提交)。
+> - 运行方式与阶段对照见 [`README.md`](README.md);权威设计见 `docs/superpowers/specs/`、实施计划见 `docs/superpowers/plans/`、全量对话归档见 [`docs/ai-chat/index.md`](docs/ai-chat/index.md)。
+> - **与原文的偏离**:原 §四"内存功能…不强求",交付后已按用户需求**完整实现**(单寄存器 → 内存栈 → `M▾` 浮窗),详见设计规格 §6.6 与归档 `docs/ai-chat/05-memory.md`。
+>
+> 以下为原始需求内容。
+
+---
+
 > 投喂给 AI 的总指令。AI 需严格按本文档的 29 步清单逐步执行,每步独立提交。
 
 ## 一、角色与目标
