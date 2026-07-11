@@ -90,5 +90,11 @@ export function useCalculator() {
     current.value = current.value.startsWith('-') ? current.value.slice(1) : '-' + current.value
   }
 
-  return { current, expression, activeOp, inputDigit, inputDot, chooseOp, equals, clearAll, clearEntry, backspace, negate }
+  function percent() {
+    if (error.value) return
+    current.value = format(parseFloat(current.value) / 100)
+    resetNext.value = true
+  }
+
+  return { current, expression, activeOp, inputDigit, inputDot, chooseOp, equals, clearAll, clearEntry, backspace, negate, percent }
 }
