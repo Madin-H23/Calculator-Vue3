@@ -36,6 +36,7 @@ function dispatch(p) {
       <span class="menu">≡</span>
       <span class="mode">标准</span>
       <span class="caret">▾</span>
+      <span v-if="hasMemory" class="mem-badge">M</span>
       <button class="theme-toggle" @click="toggleTheme">{{ theme === 'light' ? '🌙' : '☀' }}</button>
     </div>
     <Display :expression="expression" :current="current" />
@@ -60,6 +61,7 @@ function dispatch(p) {
 }
 .title-bar .menu { font-size: 18px; }
 .title-bar .caret { font-size: 12px; }
+.title-bar .mem-badge { font-size: 13px; font-weight: 600; color: var(--accent); }
 .title-bar .theme-toggle {
   margin-left: auto; border: none; background: transparent; cursor: pointer;
   font-size: 16px; color: var(--display-expr); border-radius: var(--radius-btn); padding: 2px 6px;
