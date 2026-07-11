@@ -26,8 +26,8 @@ export function useCalculator() {
   const resetNext = ref(false)
   const error = ref(false)
   const activeOp = computed(() => (error.value ? null : pendingOp.value))
-  const memory = ref(0)
-  const hasMemory = ref(false)
+  const memory = ref([])
+  const hasMemory = computed(() => memory.value.length > 0)
 
   function clearAll() {
     current.value = '0'
@@ -132,29 +132,44 @@ export function useCalculator() {
 
   function memoryStore() {
     if (error.value) return
-    memory.value = parseFloat(current.value) || 0
-    hasMemory.value = true
+    const v = parseFloat(current.value) || 0
+    memory.value = [v, ...memory.value]
+    resetNext.value = true
   }
   function memoryClear() {
-    memory.value = 0
-    hasMemory.value = false
+    memory.value = []
   }
   function memoryRecall() {
-    if (!hasMemory.value) return
+    if (!memory.value.length) return
     error.value = false
-    current.value = format(memory.value)
+    current.value = format(memory.value[0])
     resetNext.value = true
   }
   function memoryAdd() {
     if (error.value) return
-    memory.value += parseFloat(current.value) || 0
-    hasMemory.value = true
+    const v = parseFloat(current.value) || 0
+    memory.value = memory.value.length ? [memory.value[0] + v, ...memory.value.slice(1)] : [v]
+    resetNext.value = true
   }
   function memorySubtract() {
     if (error.value) return
-    memory.value -= parseFloat(current.value) || 0
-    hasMemory.value = true
+    const v = parseFloat(current.value) || 0
+    memory.value = memory.value.length ? [memory.value[0] - v, ...memory.value.slice(1)] : [-v]
+    resetNext.value = true
+  }
+  function memoryClearAt(i) {
+    memory.value = memory.value.filter((_, idx) => idx !== i)
+  }
+  function memoryAddAt(i) {
+    if (error.value) return
+    const v = parseFloat(current.value) || 0
+    memory.value = memory.value.map((x, idx) => (idx === i ? x + v : x))
+  }
+  function memorySubtractAt(i) {
+    if (error.value) return
+    const v = parseFloat(current.value) || 0
+    memory.value = memory.value.map((x, idx) => (idx === i ? x - v : x))
   }
 
-  return { current, expression, activeOp, memory, hasMemory, inputDigit, inputDot, chooseOp, equals, clearAll, clearEntry, backspace, negate, percent, reciprocal, square, sqrt, memoryStore, memoryClear, memoryRecall, memoryAdd, memorySubtract }
+  return { current, expression, activeOp, memory, hasMemory, inputDigit, inputDot, chooseOp, equals, clearAll, clearEntry, backspace, negate, percent, reciprocal, square, sqrt, memoryStore, memoryClear, memoryRecall, memoryAdd, memorySubtract, memoryClearAt, memoryAddAt, memorySubtractAt }
 }
