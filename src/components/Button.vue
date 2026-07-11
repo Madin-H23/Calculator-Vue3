@@ -30,4 +30,16 @@ defineEmits(['press'])
 }
 .btn.number:hover { background: var(--num-hover); }
 .btn.number:active { background: var(--num-pressed); }
+.btn.operator {
+  background: var(--op-bg);
+  font-size: 22px;
+  font-weight: 600;
+  padding: 14px 0;
+}
+.btn.operator:hover { background: var(--op-hover); }
+.btn.operator:active { background: var(--op-pressed); }
+.btn.operator.active {
+  background: var(--accent);
+  color: var(--eq-fg);
+}
 </style>
