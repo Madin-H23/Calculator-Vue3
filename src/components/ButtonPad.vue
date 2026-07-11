@@ -21,7 +21,7 @@ const buttons = [
   { label: '±', variant: 'function' },
   { label: '0', variant: 'number', type: 'digit', value: '0' },
   { label: '.', variant: 'number', type: 'dot' },
-  { label: '=', variant: 'equals' },
+  { label: '=', variant: 'equals', type: 'equals' },
 ]
 </script>
 

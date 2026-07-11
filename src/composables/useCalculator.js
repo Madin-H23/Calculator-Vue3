@@ -65,5 +65,17 @@ export function useCalculator() {
     resetNext.value = true
   }
 
-  return { current, expression, activeOp, inputDigit, inputDot, chooseOp }
+  function equals() {
+    if (error.value || pendingOp.value == null || prevValue.value == null) return
+    const val = parseFloat(current.value)
+    const r = compute(prevValue.value, val, pendingOp.value)
+    expression.value = `${format(prevValue.value)} ${OP_SYMBOL[pendingOp.value]} ${format(val)} =`
+    if (typeof r === 'string') { setError(r); pendingOp.value = null; resetNext.value = true; return }
+    current.value = format(r)
+    pendingOp.value = null
+    prevValue.value = null
+    resetNext.value = true
+  }
+
+  return { current, expression, activeOp, inputDigit, inputDot, chooseOp, equals }
 }
