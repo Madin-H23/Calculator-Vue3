@@ -4,7 +4,7 @@ import { useCalculator } from '../composables/useCalculator.js'
 import Display from './Display.vue'
 import ButtonPad from './ButtonPad.vue'
 
-const { current, expression, activeOp, inputDigit, inputDot, chooseOp, equals, clearAll, clearEntry, backspace, negate, percent, reciprocal, square, sqrt } = useCalculator()
+const { current, expression, activeOp, hasMemory, inputDigit, inputDot, chooseOp, equals, clearAll, clearEntry, backspace, negate, percent, reciprocal, square, sqrt, memoryStore, memoryClear, memoryRecall, memoryAdd, memorySubtract } = useCalculator()
 
 const theme = ref('light')
 function toggleTheme() { theme.value = theme.value === 'light' ? 'dark' : 'light' }
@@ -22,6 +22,11 @@ function dispatch(p) {
   else if (p.type === 'reciprocal') reciprocal()
   else if (p.type === 'square') square()
   else if (p.type === 'sqrt') sqrt()
+  else if (p.type === 'mc') memoryClear()
+  else if (p.type === 'mr') memoryRecall()
+  else if (p.type === 'mplus') memoryAdd()
+  else if (p.type === 'mminus') memorySubtract()
+  else if (p.type === 'ms') memoryStore()
 }
 </script>
 
@@ -34,7 +39,7 @@ function dispatch(p) {
       <button class="theme-toggle" @click="toggleTheme">{{ theme === 'light' ? '🌙' : '☀' }}</button>
     </div>
     <Display :expression="expression" :current="current" />
-    <ButtonPad :active-op="activeOp" @press="dispatch" />
+    <ButtonPad :active-op="activeOp" :has-memory="hasMemory" @press="dispatch" />
   </div>
 </template>
 

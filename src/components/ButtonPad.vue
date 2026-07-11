@@ -1,8 +1,15 @@
 <script setup>
 import Button from './Button.vue'
 defineEmits(['press'])
-const props = defineProps({ activeOp: String })
-const memoryButtons = ['MC', 'MR', 'M+', 'M-', 'MS', 'M▾']
+const props = defineProps({ activeOp: String, hasMemory: Boolean })
+const memoryButtons = [
+  { label: 'MC', type: 'mc', needsMemory: true },
+  { label: 'MR', type: 'mr', needsMemory: true },
+  { label: 'M+', type: 'mplus' },
+  { label: 'M-', type: 'mminus' },
+  { label: 'MS', type: 'ms' },
+  { label: 'M▾', type: null },
+]
 const buttons = [
   { label: '%', variant: 'function', type: 'percent' }, { label: 'CE', variant: 'function', type: 'ce' }, { label: 'C', variant: 'function', type: 'clear' }, { label: '⌫', variant: 'function', type: 'back' },
   { label: '1/x', variant: 'function', type: 'reciprocal' }, { label: 'x²', variant: 'function', type: 'square' }, { label: '√x', variant: 'function', type: 'sqrt' }, { label: '÷', variant: 'operator', type: 'op', value: '÷' },
@@ -28,7 +35,12 @@ const buttons = [
 <template>
   <div>
     <div class="memory-row" style="display: flex;">
-      <Button v-for="(m, i) in memoryButtons" :key="'m' + i" :label="m" variant="function" disabled />
+      <Button
+        v-for="(m, i) in memoryButtons" :key="'m' + i"
+        :label="m.label" variant="function"
+        :disabled="m.type === null || (m.needsMemory && !props.hasMemory)"
+        @press="m.type && $emit('press', { type: m.type })"
+      />
     </div>
     <div class="button-pad" style="display: grid; grid-template-columns: repeat(4, 1fr);">
       <Button

@@ -26,6 +26,8 @@ export function useCalculator() {
   const resetNext = ref(false)
   const error = ref(false)
   const activeOp = computed(() => (error.value ? null : pendingOp.value))
+  const memory = ref(0)
+  const hasMemory = ref(false)
 
   function clearAll() {
     current.value = '0'
@@ -128,5 +130,31 @@ export function useCalculator() {
     resetNext.value = true
   }
 
-  return { current, expression, activeOp, inputDigit, inputDot, chooseOp, equals, clearAll, clearEntry, backspace, negate, percent, reciprocal, square, sqrt }
+  function memoryStore() {
+    if (error.value) return
+    memory.value = parseFloat(current.value) || 0
+    hasMemory.value = true
+  }
+  function memoryClear() {
+    memory.value = 0
+    hasMemory.value = false
+  }
+  function memoryRecall() {
+    if (!hasMemory.value) return
+    error.value = false
+    current.value = format(memory.value)
+    resetNext.value = true
+  }
+  function memoryAdd() {
+    if (error.value) return
+    memory.value += parseFloat(current.value) || 0
+    hasMemory.value = true
+  }
+  function memorySubtract() {
+    if (error.value) return
+    memory.value -= parseFloat(current.value) || 0
+    hasMemory.value = true
+  }
+
+  return { current, expression, activeOp, memory, hasMemory, inputDigit, inputDot, chooseOp, equals, clearAll, clearEntry, backspace, negate, percent, reciprocal, square, sqrt, memoryStore, memoryClear, memoryRecall, memoryAdd, memorySubtract }
 }
