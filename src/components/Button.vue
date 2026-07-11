@@ -42,4 +42,13 @@ defineEmits(['press'])
   background: var(--accent);
   color: var(--eq-fg);
 }
+.btn.equals {
+  background: var(--eq-bg);
+  color: var(--eq-fg);
+  font-size: 22px;
+  font-weight: 600;
+  padding: 14px 0;
+}
+.btn.equals:hover { background: var(--eq-hover); }
+.btn.equals:active { background: var(--eq-pressed); }
 </style>
