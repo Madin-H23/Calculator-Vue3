@@ -18,7 +18,7 @@ const buttons = [
   { label: '2', variant: 'number', type: 'digit', value: '2' },
   { label: '3', variant: 'number', type: 'digit', value: '3' },
   { label: '+', variant: 'operator', type: 'op', value: '+' },
-  { label: '±', variant: 'function' },
+  { label: '±', variant: 'function', type: 'negate' },
   { label: '0', variant: 'number', type: 'digit', value: '0' },
   { label: '.', variant: 'number', type: 'dot' },
   { label: '=', variant: 'equals', type: 'equals' },

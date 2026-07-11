@@ -85,5 +85,10 @@ export function useCalculator() {
     if (current.value === '-') current.value = '0'
   }
 
-  return { current, expression, activeOp, inputDigit, inputDot, chooseOp, equals, clearAll, clearEntry, backspace }
+  function negate() {
+    if (error.value || current.value === '0') return
+    current.value = current.value.startsWith('-') ? current.value.slice(1) : '-' + current.value
+  }
+
+  return { current, expression, activeOp, inputDigit, inputDot, chooseOp, equals, clearAll, clearEntry, backspace, negate }
 }
