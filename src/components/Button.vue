@@ -20,8 +20,10 @@ defineEmits(['press'])
   color: var(--btn-fg);
   cursor: pointer;
   user-select: none;
+  transition: background-color 0.08s ease, transform 0.05s ease;
 }
 .btn:disabled { cursor: default; }
+.btn:not(:disabled):active { transform: scale(0.98); }
 .btn.number {
   background: var(--num-bg);
   font-size: 22px;

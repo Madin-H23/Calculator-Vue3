@@ -39,3 +39,10 @@ const buttons = [
     </div>
   </div>
 </template>
+
+<style scoped>
+.memory-row { gap: 2px; padding: 2px 4px; }
+.memory-row :deep(.btn) { flex: 1 1 0; height: 32px; }
+.button-pad { gap: 2px; padding: 2px 4px 4px; }
+.button-pad :deep(.btn) { width: 100%; }
+</style>
