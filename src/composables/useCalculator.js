@@ -24,5 +24,11 @@ export function useCalculator() {
     current.value = current.value === '0' ? d : current.value + d
   }
 
-  return { current, expression, activeOp, inputDigit }
+  function inputDot() {
+    if (error.value) { clearAll(); current.value = '0.'; return }
+    if (resetNext.value) { current.value = '0.'; resetNext.value = false; return }
+    if (!current.value.includes('.')) current.value += '.'
+  }
+
+  return { current, expression, activeOp, inputDigit, inputDot }
 }
