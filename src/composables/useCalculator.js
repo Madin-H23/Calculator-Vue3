@@ -1,5 +1,23 @@
 import { ref, computed } from 'vue'
 
+const OP_SYMBOL = { '+': '+', '-': '−', '×': '×', '÷': '÷' }
+
+function compute(a, b, op) {
+  if (op === '÷' && b === 0) return '不能除以零'
+  let r
+  if (op === '+') r = a + b
+  else if (op === '-') r = a - b
+  else if (op === '×') r = a * b
+  else r = a / b
+  if (!isFinite(r)) return '无效输入'
+  return r
+}
+
+function format(n) {
+  if (!isFinite(n)) return '无效输入'
+  return Number(n.toPrecision(15)).toString()
+}
+
 export function useCalculator() {
   const current = ref('0')
   const expression = ref('')
@@ -30,5 +48,22 @@ export function useCalculator() {
     if (!current.value.includes('.')) current.value += '.'
   }
 
-  return { current, expression, activeOp, inputDigit, inputDot }
+  function setError(msg) { current.value = msg; error.value = true }
+
+  function chooseOp(op) {
+    if (error.value) return
+    let val = parseFloat(current.value)
+    if (pendingOp.value && !resetNext.value && prevValue.value != null) {
+      const r = compute(prevValue.value, val, pendingOp.value)
+      if (typeof r === 'string') { setError(r); return }
+      val = r
+      current.value = format(val)
+    }
+    prevValue.value = val
+    pendingOp.value = op
+    expression.value = `${format(val)} ${OP_SYMBOL[op]}`
+    resetNext.value = true
+  }
+
+  return { current, expression, activeOp, inputDigit, inputDot, chooseOp }
 }
