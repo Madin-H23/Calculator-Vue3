@@ -1,9 +1,13 @@
 <script setup>
+import { ref } from 'vue'
 import { useCalculator } from '../composables/useCalculator.js'
 import Display from './Display.vue'
 import ButtonPad from './ButtonPad.vue'
 
 const { current, expression, activeOp, inputDigit, inputDot, chooseOp, equals, clearAll, clearEntry, backspace, negate, percent, reciprocal, square, sqrt } = useCalculator()
+
+const theme = ref('light')
+function toggleTheme() { theme.value = theme.value === 'light' ? 'dark' : 'light' }
 
 function dispatch(p) {
   if (p.type === 'digit') inputDigit(p.value)
@@ -22,7 +26,13 @@ function dispatch(p) {
 </script>
 
 <template>
-  <div class="calculator">
+  <div class="calculator" :class="{ dark: theme === 'dark' }">
+    <div class="title-bar">
+      <span class="menu">≡</span>
+      <span class="mode">标准</span>
+      <span class="caret">▾</span>
+      <button class="theme-toggle" @click="toggleTheme">{{ theme === 'light' ? '🌙' : '☀' }}</button>
+    </div>
     <Display :expression="expression" :current="current" />
     <ButtonPad :active-op="activeOp" @press="dispatch" />
   </div>
@@ -39,4 +49,15 @@ function dispatch(p) {
   overflow: hidden;
   font-family: var(--font);
 }
+.title-bar {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 12px 4px; font-size: 14px; color: var(--display-expr);
+}
+.title-bar .menu { font-size: 18px; }
+.title-bar .caret { font-size: 12px; }
+.title-bar .theme-toggle {
+  margin-left: auto; border: none; background: transparent; cursor: pointer;
+  font-size: 16px; color: var(--display-expr); border-radius: var(--radius-btn); padding: 2px 6px;
+}
+.title-bar .theme-toggle:hover { background: var(--fn-hover); }
 </style>
