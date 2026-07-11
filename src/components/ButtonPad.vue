@@ -37,7 +37,7 @@ const buttons = [
     <div class="memory-row" style="display: flex;">
       <Button
         v-for="(m, i) in memoryButtons" :key="'m' + i"
-        :label="m.label" variant="function"
+        :label="m.label" variant="memory"
         :disabled="m.type === null || (m.needsMemory && !props.hasMemory)"
         @press="m.type && $emit('press', { type: m.type })"
       />
