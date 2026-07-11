@@ -1,5 +1,6 @@
 <script setup>
 import Button from './Button.vue'
+const memoryButtons = ['MC', 'MR', 'M+', 'M-', 'MS', 'M▾']
 const buttons = [
   { label: '%', variant: 'function' }, { label: 'CE', variant: 'function' }, { label: 'C', variant: 'function' }, { label: '⌫', variant: 'function' },
   { label: '1/x', variant: 'function' }, { label: 'x²', variant: 'function' }, { label: '√x', variant: 'function' }, { label: '÷', variant: 'operator' },
@@ -11,7 +12,12 @@ const buttons = [
 </script>
 
 <template>
-  <div class="button-pad" style="display: grid; grid-template-columns: repeat(4, 1fr);">
-    <Button v-for="(b, i) in buttons" :key="i" :label="b.label" :variant="b.variant" />
+  <div>
+    <div class="memory-row" style="display: flex;">
+      <Button v-for="(m, i) in memoryButtons" :key="'m' + i" :label="m" variant="function" disabled />
+    </div>
+    <div class="button-pad" style="display: grid; grid-template-columns: repeat(4, 1fr);">
+      <Button v-for="(b, i) in buttons" :key="i" :label="b.label" :variant="b.variant" />
+    </div>
   </div>
 </template>
