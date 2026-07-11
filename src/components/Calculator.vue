@@ -3,7 +3,7 @@ import { useCalculator } from '../composables/useCalculator.js'
 import Display from './Display.vue'
 import ButtonPad from './ButtonPad.vue'
 
-const { current, expression, activeOp, inputDigit, inputDot, chooseOp, equals, clearAll, clearEntry, backspace, negate, percent } = useCalculator()
+const { current, expression, activeOp, inputDigit, inputDot, chooseOp, equals, clearAll, clearEntry, backspace, negate, percent, reciprocal, square, sqrt } = useCalculator()
 
 function dispatch(p) {
   if (p.type === 'digit') inputDigit(p.value)
@@ -15,6 +15,9 @@ function dispatch(p) {
   else if (p.type === 'back') backspace()
   else if (p.type === 'negate') negate()
   else if (p.type === 'percent') percent()
+  else if (p.type === 'reciprocal') reciprocal()
+  else if (p.type === 'square') square()
+  else if (p.type === 'sqrt') sqrt()
 }
 </script>
 

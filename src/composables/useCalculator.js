@@ -96,5 +96,37 @@ export function useCalculator() {
     resetNext.value = true
   }
 
-  return { current, expression, activeOp, inputDigit, inputDot, chooseOp, equals, clearAll, clearEntry, backspace, negate, percent }
+  function reciprocal() {
+    if (error.value) return
+    const v = parseFloat(current.value)
+    if (v === 0) { setError('不能除以零'); return }
+    const r = 1 / v
+    if (!isFinite(r)) { setError('无效输入'); return }
+    expression.value = `1/(${current.value})`
+    current.value = format(r)
+    resetNext.value = true
+  }
+
+  function square() {
+    if (error.value) return
+    const v = parseFloat(current.value)
+    const r = v * v
+    if (!isFinite(r)) { setError('无效输入'); return }
+    expression.value = `sqr(${current.value})`
+    current.value = format(r)
+    resetNext.value = true
+  }
+
+  function sqrt() {
+    if (error.value) return
+    const v = parseFloat(current.value)
+    if (v < 0) { setError('无效输入'); return }
+    const r = Math.sqrt(v)
+    if (!isFinite(r)) { setError('无效输入'); return }
+    expression.value = `√(${current.value})`
+    current.value = format(r)
+    resetNext.value = true
+  }
+
+  return { current, expression, activeOp, inputDigit, inputDot, chooseOp, equals, clearAll, clearEntry, backspace, negate, percent, reciprocal, square, sqrt }
 }

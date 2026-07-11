@@ -5,7 +5,7 @@ const props = defineProps({ activeOp: String })
 const memoryButtons = ['MC', 'MR', 'M+', 'M-', 'MS', 'M▾']
 const buttons = [
   { label: '%', variant: 'function', type: 'percent' }, { label: 'CE', variant: 'function', type: 'ce' }, { label: 'C', variant: 'function', type: 'clear' }, { label: '⌫', variant: 'function', type: 'back' },
-  { label: '1/x', variant: 'function' }, { label: 'x²', variant: 'function' }, { label: '√x', variant: 'function' }, { label: '÷', variant: 'operator', type: 'op', value: '÷' },
+  { label: '1/x', variant: 'function', type: 'reciprocal' }, { label: 'x²', variant: 'function', type: 'square' }, { label: '√x', variant: 'function', type: 'sqrt' }, { label: '÷', variant: 'operator', type: 'op', value: '÷' },
   { label: '7', variant: 'number', type: 'digit', value: '7' },
   { label: '8', variant: 'number', type: 'digit', value: '8' },
   { label: '9', variant: 'number', type: 'digit', value: '9' },
