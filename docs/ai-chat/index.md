@@ -36,3 +36,10 @@
 | 27 | `b425f82` | style: 圆角、边框、阴影、内存按钮行收尾细节 | `03-style-08.md` |
 | 28 | (本提交) | docs: 归档各阶段完整 AI 对话记录 | `04-finalize.md` |
 | 29 | (下一提交) | docs: README 说明(运行方式 + 阶段对照) | `04-finalize.md` |
+
+## 交付后扩展(内存功能)
+
+| 步 | Commit | Subject | 归档文件 |
+|---|---|---|---|
+| 30 | `68c53c8` | feat(memory): MC/MR/M+/M-/MS 内存寄存器与运算 | `05-memory.md` |
+| 31 | `3b4c450` | feat(memory): M 内存指示徽标 | `05-memory.md` |

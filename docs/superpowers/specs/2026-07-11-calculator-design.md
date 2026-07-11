@@ -15,7 +15,7 @@
 - 产出一条**颗粒度极细、29 个提交**的 Git 历史,严格按"布局 → 逻辑 → 样式"三阶段推进,commit message 与 `PROMPT.md` 清单逐字一致。
 
 **非目标(YAGNI)**
-- 不做完整内存功能(MC/MR/M+…):仅作禁用占位。
+- 内存功能:**交付后追加实现**(原仅禁用占位)—— MC/MR/M+/M-/MS 单寄存器,见 §6.6;`M▾` 内存栈浮窗仍为占位。
 - 不做科学/程序员/日期模式;仅标准模式。
 - 不做键盘快捷键(仅鼠标点击)。
 - 不引入 TypeScript、UI 库、状态管理库、图标库、测试框架。
@@ -191,6 +191,22 @@ App.vue
 | 一元覆写 `expression` | `5 + 1/x =` 保留链 `5 + 1/(5) =` | `expression` 被一元覆写为 `1/(5)` | 结果正确;验收仅要求"expression 反映操作",已满足 |
 
 > 以上三项为**纯保真增强**,非 bug;为控范围与逻辑阶段风险,列为已知简化。robustness 类问题(溢出/除零/负数开方 → error 态)已在 6.2/6.3 修齐。
+
+### 6.6 内存功能(交付后扩展)
+
+> 原 §1 列为非目标(禁用占位);交付后按用户需求追加(commit `68c53c8`/`3b4c450`,归档 `docs/ai-chat/05-memory.md`)。采用**单寄存器**内存(非 Win11 的内存栈);`M▾` 浮窗仍为占位。
+
+状态:`memory = ref(0)`、`hasMemory = ref(false)`。
+
+| action | 行为 |
+|---|---|
+| `memoryStore`(MS) | `error` 忽略;`memory = parseFloat(current)`(NaN 按 0);`hasMemory = true` |
+| `memoryClear`(MC) | `memory = 0`;`hasMemory = false` |
+| `memoryRecall`(MR) | `!hasMemory` 忽略;`error=false`;`current = format(memory)`;`resetNext=true` |
+| `memoryAdd`(M+) | `error` 忽略;`memory += parseFloat(current)`(NaN 按 0);`hasMemory = true` |
+| `memorySubtract`(M-) | `error` 忽略;`memory -= parseFloat(current)`(NaN 按 0);`hasMemory = true` |
+
+启用态:`MC`/`MR` 在 `!hasMemory` 时禁用;`M+`/`M-`/`MS` 始终启用;`M▾` 始终禁用。`hasMemory` 时标题栏显示 `M` 徽标(`--accent` 色)。
 
 ---
 
