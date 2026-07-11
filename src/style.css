@@ -1,0 +1,28 @@
+:root {
+  --font: 'Segoe UI Variable Display', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --bg: #F3F3F3;
+  --display-expr: #616161;
+  --display-result: #201F1F;
+  --fn-bg: #F9F9F9;  --fn-hover: #F0F0F0;  --fn-pressed: #E6E6E6;
+  --num-bg: #FBFBFB; --num-hover: #F3F3F3; --num-pressed: #EBEBEB;
+  --op-bg: #FBFBFB;  --op-hover: #F3F3F3;  --op-pressed: #EBEBEB;
+  --eq-bg: #0078D4;  --eq-hover: #1A86D9;  --eq-pressed: #0067C0;  --eq-fg: #FFFFFF;
+  --accent: #0078D4;
+  --memory-fg: #B5B5B5;
+  --btn-fg: #201F1F;
+  --radius-window: 8px;
+  --radius-btn: 4px;
+}
+.dark {
+  --bg: #202020;
+  --display-expr: #9A9A9A;
+  --display-result: #FFFFFF;
+  --fn-bg: #2B2B2B;  --fn-hover: #3A3A3A;  --fn-pressed: #4A4A4A;
+  --num-bg: #2B2B2B; --num-hover: #3A3A3A; --num-pressed: #4A4A4A;
+  --op-bg: #2B2B2B;  --op-hover: #3A3A3A;  --op-pressed: #4A4A4A;
+  --memory-fg: #5A5A5A;
+  --btn-fg: #FFFFFF;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--bg); }
+body { font-family: var(--font); }

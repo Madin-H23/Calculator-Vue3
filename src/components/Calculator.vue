@@ -27,3 +27,16 @@ function dispatch(p) {
     <ButtonPad :active-op="activeOp" @press="dispatch" />
   </div>
 </template>
+
+<style scoped>
+.calculator {
+  width: 360px;
+  margin: 40px auto;
+  background: var(--bg);
+  border-radius: var(--radius-window);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  font-family: var(--font);
+}
+</style>
