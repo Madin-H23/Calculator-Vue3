@@ -8,7 +8,7 @@ const memoryButtons = [
   { label: 'M+', type: 'mplus' },
   { label: 'M-', type: 'mminus' },
   { label: 'MS', type: 'ms' },
-  { label: 'M▾', type: null },
+  { label: 'M▾', type: 'mtoggle' },
 ]
 const buttons = [
   { label: '%', variant: 'function', type: 'percent' }, { label: 'CE', variant: 'function', type: 'ce' }, { label: 'C', variant: 'function', type: 'clear' }, { label: '⌫', variant: 'function', type: 'back' },
@@ -38,8 +38,8 @@ const buttons = [
       <Button
         v-for="(m, i) in memoryButtons" :key="'m' + i"
         :label="m.label" variant="memory"
-        :disabled="m.type === null || (m.needsMemory && !props.hasMemory)"
-        @press="m.type && $emit('press', { type: m.type })"
+        :disabled="m.needsMemory && !props.hasMemory"
+        @press="$emit('press', { type: m.type })"
       />
     </div>
     <div class="button-pad" style="display: grid; grid-template-columns: repeat(4, 1fr);">

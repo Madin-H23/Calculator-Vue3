@@ -1,15 +1,27 @@
 <script setup>
-import { ref } from 'vue'
-import { useCalculator } from '../composables/useCalculator.js'
+import { ref, computed } from 'vue'
+import { useCalculator, format } from '../composables/useCalculator.js'
 import Display from './Display.vue'
 import ButtonPad from './ButtonPad.vue'
+import MemoryPanel from './MemoryPanel.vue'
 
-const { current, expression, activeOp, hasMemory, inputDigit, inputDot, chooseOp, equals, clearAll, clearEntry, backspace, negate, percent, reciprocal, square, sqrt, memoryStore, memoryClear, memoryRecall, memoryAdd, memorySubtract } = useCalculator()
+const {
+  current, expression, activeOp, hasMemory, memory,
+  inputDigit, inputDot, chooseOp, equals,
+  clearAll, clearEntry, backspace, negate, percent,
+  reciprocal, square, sqrt,
+  memoryStore, memoryClear, memoryRecall, memoryAdd, memorySubtract,
+  memoryClearAt, memoryAddAt, memorySubtractAt,
+} = useCalculator()
 
 const theme = ref('light')
 function toggleTheme() { theme.value = theme.value === 'light' ? 'dark' : 'light' }
 
+const showMemory = ref(false)
+const memoryView = computed(() => memory.value.map((n) => format(n).replaceAll('-', '−')))
+
 function dispatch(p) {
+  if (p.type === 'mtoggle') { showMemory.value = !showMemory.value; return }
   if (p.type === 'digit') inputDigit(p.value)
   else if (p.type === 'dot') inputDot()
   else if (p.type === 'op') chooseOp(p.value)
@@ -32,6 +44,7 @@ function dispatch(p) {
 
 <template>
   <div class="calculator" :class="{ dark: theme === 'dark' }">
+    <div v-if="showMemory" class="memory-backdrop" @click="showMemory = false"></div>
     <div class="title-bar">
       <span class="menu">≡</span>
       <span class="mode">标准</span>
@@ -40,12 +53,22 @@ function dispatch(p) {
       <button class="theme-toggle" @click="toggleTheme">{{ theme === 'light' ? '🌙' : '☀' }}</button>
     </div>
     <Display :expression="expression" :current="current" />
-    <ButtonPad :active-op="activeOp" :has-memory="hasMemory" @press="dispatch" />
+    <div class="pad-area">
+      <ButtonPad :active-op="activeOp" :has-memory="hasMemory" @press="dispatch" />
+      <MemoryPanel
+        v-if="showMemory"
+        :items="memoryView"
+        @clear="memoryClearAt"
+        @add="memoryAddAt"
+        @subtract="memorySubtractAt"
+      />
+    </div>
   </div>
 </template>
 
 <style scoped>
 .calculator {
+  position: relative;
   width: 360px;
   margin: 40px auto;
   background: var(--bg);
@@ -55,6 +78,8 @@ function dispatch(p) {
   overflow: hidden;
   font-family: var(--font);
 }
+.memory-backdrop { position: absolute; inset: 0; z-index: 50; }
+.pad-area { position: relative; }
 .title-bar {
   display: flex; align-items: center; gap: 8px;
   padding: 10px 12px 4px; font-size: 14px; color: var(--display-expr);

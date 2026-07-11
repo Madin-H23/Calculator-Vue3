@@ -13,7 +13,7 @@ function compute(a, b, op) {
   return r
 }
 
-function format(n) {
+export function format(n) {
   if (!isFinite(n)) return '无效输入'
   return Number(n.toPrecision(15)).toString()
 }
