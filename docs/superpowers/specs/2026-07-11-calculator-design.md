@@ -2,7 +2,7 @@
 
 > 状态:已纳入用户复核反馈(v1),待用户确认。
 > 日期:2026-07-11
-> 上游规格:`PROMPT.md`(29 步执行清单,本文件为其设计细化);执行清单:`TODO.md`。
+> 上游规格:`PROMPT.md`(29 步执行清单,本文件为其设计细化)。
 > 本文件经 `superpowers:brainstorming` 产出,后续由 `writing-plans` 转为实施计划。
 
 ---
@@ -258,7 +258,7 @@ App.vue
 
 ## 11. 阶段 → 提交映射
 
-严格按 `PROMPT.md`/`TODO.md` 的 29 步,1 步 1 提交,message **subject** 逐字一致;每个提交 body 末尾加尾注 `Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>`(已确认:`--oneline`/`%s` 比对不受影响)。两处**已认可的纪律豁免**:
+严格按 `PROMPT.md` 的 29 步,1 步 1 提交,message **subject** 逐字一致;每个提交 body 末尾加尾注 `Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>`(已确认:`--oneline`/`%s` 比对不受影响)。两处**已认可的纪律豁免**:
 1. **步5**:内联 `display:grid` 保证网格结构(`PROMPT.md` 已明示豁免)。
 2. **步27**:主题切换逻辑就地加入(本次头脑风暴认可,见第 8 节)。
 
@@ -290,7 +290,6 @@ calculator/
 ├── vite.config.js
 ├── README.md
 ├── PROMPT.md
-├── TODO.md
 ├── docs/
 │   ├── superpowers/specs/2026-07-11-calculator-design.md   ← 本文件
 │   ├── ai-chat/                                            ← 步28 归档

@@ -8,7 +8,7 @@
 
 **Tech Stack:** Vue 3 `<script setup>`(Composition API)、Vite 5、JavaScript(ES2020+)。无 TS / 无 UI 库 / 无状态库 / 无图标库 / 无测试框架。
 
-**上游:** `PROMPT.md`(29 步清单 + commit message 基准)、`TODO.md`(执行清单)、`docs/superpowers/specs/2026-07-11-calculator-design.md`(设计规格,权威语义)。
+**上游:** `PROMPT.md`(29 步清单 + commit message 基准)、`docs/superpowers/specs/2026-07-11-calculator-design.md`(设计规格,权威语义)。
 
 ---
 
@@ -51,7 +51,7 @@
 
 **Files:** Create `package.json`, `vite.config.js`, `index.html`, `.gitignore`, `jsconfig.json`, `src/main.js`, `src/style.css`, `src/App.vue`, `src/components/HelloWorld.vue`, `src/assets/vue.svg`, `public/vite.svg`
 
-> 目录已含已提交的规划文档(PROMPT.md/TODO.md/docs),故**直接手写标准 Vite+Vue 模板文件**(等价 `npm create vite@latest . -- --template vue` 的产物,避免与非空目录冲突)。
+> 目录已含已提交的规划文档(PROMPT.md/docs),故**直接手写标准 Vite+Vue 模板文件**(等价 `npm create vite@latest . -- --template vue` 的产物,避免与非空目录冲突)。
 
 - [ ] **Step 1: 写 `package.json`**
 ```json
