@@ -71,4 +71,6 @@ defineEmits(['press'])
 .btn.memory:disabled {
   color: var(--memory-fg);
 }
+.btn.memory:not(:disabled):hover { background: var(--num-hover); }
+.btn.memory:not(:disabled):active { background: var(--num-pressed); }
 </style>
