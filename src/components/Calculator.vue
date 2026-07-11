@@ -3,13 +3,15 @@ import { useCalculator } from '../composables/useCalculator.js'
 import Display from './Display.vue'
 import ButtonPad from './ButtonPad.vue'
 
-const { current, expression, activeOp, inputDigit, inputDot, chooseOp, equals } = useCalculator()
+const { current, expression, activeOp, inputDigit, inputDot, chooseOp, equals, clearAll, clearEntry } = useCalculator()
 
 function dispatch(p) {
   if (p.type === 'digit') inputDigit(p.value)
   else if (p.type === 'dot') inputDot()
   else if (p.type === 'op') chooseOp(p.value)
   else if (p.type === 'equals') equals()
+  else if (p.type === 'clear') clearAll()
+  else if (p.type === 'ce') clearEntry()
 }
 </script>
 

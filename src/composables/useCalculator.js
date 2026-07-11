@@ -77,5 +77,7 @@ export function useCalculator() {
     resetNext.value = true
   }
 
-  return { current, expression, activeOp, inputDigit, inputDot, chooseOp, equals }
+  function clearEntry() { current.value = '0'; resetNext.value = false; error.value = false }
+
+  return { current, expression, activeOp, inputDigit, inputDot, chooseOp, equals, clearAll, clearEntry }
 }
