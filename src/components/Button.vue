@@ -11,3 +11,23 @@ defineEmits(['press'])
 <template>
   <button :class="['btn', variant, { active }]" :disabled="disabled" @click="$emit('press')">{{ label }}</button>
 </template>
+
+<style scoped>
+.btn {
+  border: none;
+  border-radius: var(--radius-btn);
+  font-family: var(--font);
+  color: var(--btn-fg);
+  cursor: pointer;
+  user-select: none;
+}
+.btn:disabled { cursor: default; }
+.btn.number {
+  background: var(--num-bg);
+  font-size: 22px;
+  font-weight: 600;
+  padding: 14px 0;
+}
+.btn.number:hover { background: var(--num-hover); }
+.btn.number:active { background: var(--num-pressed); }
+</style>
